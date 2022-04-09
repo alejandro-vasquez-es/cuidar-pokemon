@@ -1,0 +1,8 @@
+-mascotas
+-tienda
+	-restaurante
+	-farmacia
+	-pokemon
+-reportes
+-acerca de
+-ayuda
