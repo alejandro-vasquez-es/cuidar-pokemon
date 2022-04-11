@@ -1,6 +1,1 @@
-El precio para revivir una mascota nos lo debemos inventar? con la condición de que sea menor al precio.
-Entiendo que hay una tienda y en esta los pokemon que aparecen para comprar son un número reducido o son todos los de primera generación? y el nivel es aleatorio? para darle un precio
-La frecuencia con la que las mascotas piden comida nos la inventamos? igual cuando piden un paseo
-por qué el cereal aumenta las peticiones de comida a 7? según entiendo si acumula 5 peticiones se muere.
-El apartado del estado de la mascota debe mostrarse sin importar adónde vaya la aplicación? y en ese caso el estado de cuál mascota se muestra? O debe haber un apartado especial para
-ir a revisar el estado de cada mascota.
+Con cuánto dinero empieza el jugador?

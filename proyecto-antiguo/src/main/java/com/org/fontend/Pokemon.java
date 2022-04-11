@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 
-public class Pokemon extends JFrame{
+public class Pokemon extends JFrame {
     private JPanel bg;
     private JLabel labelImage;
     private JLabel labelTitle;
@@ -36,8 +36,5 @@ public class Pokemon extends JFrame{
         this.setContentPane(bg);
         this.pack();
     }
-
-
-
 
 }
