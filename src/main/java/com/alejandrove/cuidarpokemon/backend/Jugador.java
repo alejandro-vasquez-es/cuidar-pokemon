@@ -5,13 +5,13 @@ import com.alejandrove.cuidarpokemon.backend.tienda.medicina.Medicina;
 
 public class Jugador {
 
-	private Mascota[] mascotas;
-	private int totalMascotas;
-	private Medicina[] medicinas;
-	private int totalMedicinas;
-	private Comida[] comidas;
-	private int totalComidas;
-	private int dinero;
+	public Mascota[] mascotas;
+	public int totalMascotas;
+	public Medicina[] medicinas;
+	public int totalMedicinas;
+	public Comida[] comidas;
+	public int totalComidas;
+	public int dinero;
 
 	public Jugador() {
 		this.mascotas = new Mascota[10];
@@ -20,7 +20,7 @@ public class Jugador {
 		this.totalMedicinas = 0;
 		this.comidas = new Comida[100];
 		this.totalComidas = 0;
-		this.dinero = 100;
+		this.dinero = 2000;
 	}
 
 	// GETTERS

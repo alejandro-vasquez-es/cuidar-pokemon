@@ -43,6 +43,14 @@ public class Mascota {
 
 	/* SETTERS */
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public ImageIcon getSprite() {
+		return sprite;
+	}
+
 	public void setPeticionesComida(int peticionesComida) {
 		this.peticionesComida = peticionesComida;
 	}
