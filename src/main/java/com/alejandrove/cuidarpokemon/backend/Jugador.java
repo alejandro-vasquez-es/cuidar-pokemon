@@ -27,7 +27,23 @@ public class Jugador {
 	public int getDinero() {
 		return dinero;
 	}
+
+	public int getTotalMascotas() {
+		return totalMascotas;
+	}
+
+	public int getTotalComidas() {
+		return totalComidas;
+	}
 	//
+
+	/* SETTERS */
+
+	/*  */
+
+	public void disminuriComidas() {
+		totalComidas--;
+	}
 
 	public void comprarMascota(Mascota mascota) {
 		mascotas[totalMascotas] = mascota;
@@ -37,7 +53,7 @@ public class Jugador {
 
 	public void comprarComida(Comida comida) {
 		comidas[totalComidas] = comida;
-		dinero -= comida.precio;
+		dinero -= comida.getPrecio();
 		totalComidas++;
 	}
 

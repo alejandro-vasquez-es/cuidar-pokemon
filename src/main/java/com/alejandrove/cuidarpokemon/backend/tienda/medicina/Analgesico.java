@@ -11,7 +11,7 @@ public class Analgesico extends Medicina {
 
 	@Override
 	public void curarEnfermedades(Mascota mascota) {
-		mascota.curarEnfermedades(2);
+		// mascota.curarEnfermedades(2);
 	}
 
 }

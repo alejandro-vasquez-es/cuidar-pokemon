@@ -3,9 +3,13 @@ package com.alejandrove.cuidarpokemon.backend;
 import java.time.LocalDateTime;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
+import com.alejandrove.cuidarpokemon.backend.helpers.EstadosTypes;
+import com.alejandrove.cuidarpokemon.backend.helpers.PeticionesTypes;
 import com.alejandrove.cuidarpokemon.backend.tienda.comida.Comida;
 import com.alejandrove.cuidarpokemon.backend.tienda.medicina.Medicina;
+import com.alejandrove.cuidarpokemon.frontend.mascota.MascotaFrame;
 
 public class Mascota {
 
@@ -15,30 +19,52 @@ public class Mascota {
 	private LocalDateTime fechaNacimiento;
 	private String estado;
 	// TODO: No sé ha utilizado el estado.
-	private int peticionesComida;
-	private int peticionesLimpiar;
-	private int peticionesCuracion;
-	private int peticionesPaseo;
-	private int peticionesMaximasComida;
-	final private int PETICIONES_MAXIMAS_LIMPIAR = 3;
-	final private int PETICIONES_MAXIMAS_CURAR = 6;
-	final private int PETICIONES_MAXIMAS_PASEO = 4;
 	private ImageIcon sprite;
 	private String nombre;
 	private int tiempoMuerte;
+	public HiloPeticion hiloPeticionComida;
+	public int segundosPeticionComida;
+	private String peticionesComida;
+	public MascotaFrame frame;
 
 	public Mascota(String apodo, ImageIcon sprite, String nombre) {
 		this.nivel = 1;
 		this.precio = 50;
+		this.segundosPeticionComida = 10;
+		this.hiloPeticionComida = new HiloPeticion(5, segundosPeticionComida, PeticionesTypes.comida, this);
 		this.fechaNacimiento = LocalDateTime.now();
-		this.peticionesComida = 0;
-		this.peticionesLimpiar = 0;
-		this.peticionesCuracion = 0;
-		this.peticionesPaseo = 0;
-		this.peticionesMaximasComida = 5;
 		this.apodo = apodo;
 		this.sprite = sprite;
 		this.nombre = nombre;
+		this.frame = null;
+	}
+
+	public void nacer() {
+		hiloPeticionComida.start();
+		hiloPeticionComida.actualizarPeticiones();
+		this.estado = EstadosTypes.vivo;
+	}
+
+	public void morir() {
+		JOptionPane.showMessageDialog(frame,
+				"Lamentablemente tu pokemon " + apodo + " de la clase " + nombre + " ha muerto :(", "Pokemon Muerto",
+				JOptionPane.WARNING_MESSAGE);
+		this.estado = EstadosTypes.muerto;
+		hiloPeticionComida.reiniciarPeticiones();
+		hiloPeticionComida.actualizarPeticiones();
+	}
+
+	public void comer(Comida comida) {
+		comida.accionComida(this);
+		hiloPeticionComida.actualizarPeticiones();
+	}
+
+	// public void curarEnfermedades(int enfermedadesCuradas) {
+	// this.peticionesCuracion -= enfermedadesCuradas;
+	// }
+
+	public void curar(Medicina medicina) {
+		medicina.curarEnfermedades(this);
 	}
 
 	/* SETTERS */
@@ -51,12 +77,12 @@ public class Mascota {
 		return sprite;
 	}
 
-	public void setPeticionesComida(int peticionesComida) {
-		this.peticionesComida = peticionesComida;
+	public void setFrame(MascotaFrame frame) {
+		this.frame = frame;
 	}
 
-	public void setPeticionesMaximasComida(int peticionesMaximasComida) {
-		this.peticionesMaximasComida = peticionesMaximasComida;
+	public void setPeticionesComida(String peticionesComida) {
+		this.peticionesComida = peticionesComida;
 	}
 
 	/*  */
@@ -67,22 +93,14 @@ public class Mascota {
 		return apodo;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+
+	public String getPeticionesComida() {
+		return peticionesComida;
+	}
+
 	/*  */
-
-	public void disminuirPeticionesComida() {
-		this.peticionesComida--;
-	}
-
-	public void comer(Comida comida) {
-		comida.accionComida(this);
-	}
-
-	public void curarEnfermedades(int enfermedadesCuradas) {
-		this.peticionesCuracion -= enfermedadesCuradas;
-	}
-
-	public void curar(Medicina medicina) {
-		medicina.curarEnfermedades(this);
-	}
 
 }

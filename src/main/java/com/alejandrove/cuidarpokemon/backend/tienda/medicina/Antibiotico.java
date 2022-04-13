@@ -11,7 +11,7 @@ public class Antibiotico extends Medicina {
 
 	@Override
 	public void curarEnfermedades(Mascota mascota) {
-		mascota.curarEnfermedades(3);
+		// mascota.curarEnfermedades(3);
 	}
 
 }

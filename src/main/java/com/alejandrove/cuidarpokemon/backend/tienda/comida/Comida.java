@@ -4,9 +4,19 @@ import com.alejandrove.cuidarpokemon.backend.Mascota;
 
 public abstract class Comida {
 
-	public String nombre;
-	public int precio;
+	protected String nombre;
+	protected int precio;
 
 	public abstract void accionComida(Mascota mascota);
+
+	/* GETTERS */
+	public String getNombre() {
+		return nombre;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+	/*  */
 
 }

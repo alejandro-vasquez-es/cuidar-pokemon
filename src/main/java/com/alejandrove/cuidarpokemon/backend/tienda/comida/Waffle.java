@@ -11,12 +11,12 @@ public class Waffle extends Comida implements AfectarPeticionesMaximas {
 
 	@Override
 	public void afectarPeticionesMaximas(Mascota mascota) {
-		mascota.setPeticionesMaximasComida(10);
+		mascota.hiloPeticionComida.setPeticionesMaximas(10);
 	}
 
 	@Override
 	public void accionComida(Mascota mascota) {
-		mascota.setPeticionesComida(0);
+		mascota.hiloPeticionComida.reiniciarPeticiones();
 		afectarPeticionesMaximas(mascota);
 	}
 

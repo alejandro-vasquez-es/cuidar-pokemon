@@ -1,0 +1,2 @@
+- agreagar loader al comprar pokemon
+- agregar mensaje de que el pokemon esta apunto de morir

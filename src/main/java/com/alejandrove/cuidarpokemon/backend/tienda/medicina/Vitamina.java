@@ -11,7 +11,7 @@ public class Vitamina extends Medicina {
 
 	@Override
 	public void curarEnfermedades(Mascota mascota) {
-		mascota.curarEnfermedades(1);
+		// mascota.curarEnfermedades(1);
 	}
 
 }
