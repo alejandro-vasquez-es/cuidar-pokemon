@@ -9,4 +9,9 @@ public abstract class Medicina {
 
 	public abstract void curarEnfermedades(Mascota mascota);
 
+	/* GETTERS */
+	public String getNombre() {
+		return nombre;
+	}
+	/*  */
 }

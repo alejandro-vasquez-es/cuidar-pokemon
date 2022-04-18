@@ -23,6 +23,10 @@ public class Jugador {
 		this.dinero = 2000;
 	}
 
+	public void agregarDinero(int dineroAgregado) {
+		dinero += dineroAgregado;
+	}
+
 	// GETTERS
 	public int getDinero() {
 		return dinero;
@@ -35,14 +39,22 @@ public class Jugador {
 	public int getTotalComidas() {
 		return totalComidas;
 	}
+
+	public int getTotalMedicinas() {
+		return totalMedicinas;
+	}
 	//
 
 	/* SETTERS */
 
 	/*  */
 
-	public void disminuriComidas() {
+	public void disminuirComidas() {
 		totalComidas--;
+	}
+
+	public void disminuirMedicinas() {
+		totalMedicinas--;
 	}
 
 	public void comprarMascota(Mascota mascota) {

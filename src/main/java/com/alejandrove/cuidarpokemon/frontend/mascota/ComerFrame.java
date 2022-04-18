@@ -152,7 +152,7 @@ public class ComerFrame extends javax.swing.JFrame {
                 juego.jugador.comidas = Arrays.stream(juego.jugador.comidas)
                         .filter(comida -> !comidaAUsar.equals(comida))
                         .toArray(Comida[]::new);
-                juego.jugador.disminuriComidas();
+                juego.jugador.disminuirComidas();
                 rellenarComidasJugador();
                 JOptionPane.showMessageDialog(this, "La comida " + comidaAUsar.getNombre() + " se le dio al pokemon",
                         "Pokemon alimentado", JOptionPane.INFORMATION_MESSAGE);

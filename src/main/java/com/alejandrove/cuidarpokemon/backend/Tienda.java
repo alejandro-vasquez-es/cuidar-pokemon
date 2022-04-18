@@ -41,7 +41,7 @@ public class Tienda {
 		};
 	}
 
-	public void venderPokemon(int idPokemon, String[] data, String apodo, Jugador jugador) {
+	public void venderPokemon(int idPokemon, String[] data, String apodo, Jugador jugador, Log[] logs) {
 
 		Image image = null;
 		try {
@@ -52,7 +52,7 @@ public class Tienda {
 
 		ImageIcon sprite = new ImageIcon(image);
 
-		jugador.comprarMascota(new Mascota(apodo, sprite, data[0]));
+		jugador.comprarMascota(new Mascota(apodo, sprite, data[0], logs));
 	}
 
 	public void venderComida(Jugador jugador, Comida comida) {

@@ -2,6 +2,7 @@ package com.alejandrove.cuidarpokemon.backend;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.alejandrove.cuidarpokemon.backend.helpers.LogTypes;
 
@@ -16,6 +17,12 @@ public class Log {
 		fechaHora = LocalDateTime.now();
 		setInformacionSegunTipo(tipo, mascota);
 	}
+
+	/* GETTERS */
+	public String getTipo() {
+		return tipo;
+	}
+	/*  */
 
 	/* SETTERS */
 
@@ -56,7 +63,9 @@ public class Log {
 
 	@Override
 	public String toString() {
-		return fechaHora + " " + informacion;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+		String formatDateTime = fechaHora.format(formatter);
+		return formatDateTime + " " + informacion;
 	}
 
 }

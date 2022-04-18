@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.alejandrove.cuidarpokemon.backend.Jugador;
+import com.alejandrove.cuidarpokemon.backend.Log;
 import com.alejandrove.cuidarpokemon.backend.Mascota;
 import com.alejandrove.cuidarpokemon.backend.MotorJuego;
 import com.alejandrove.cuidarpokemon.frontend.mascota.MascotaFrame;
@@ -53,6 +54,14 @@ public class HelperClass {
 					"Espacio disponible",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
+	}
+
+	public static int getTotalLogs(Log[] logs) {
+		int i = 0;
+		while (logs[i] != null) {
+			i++;
+		}
+		return i;
 	}
 
 }

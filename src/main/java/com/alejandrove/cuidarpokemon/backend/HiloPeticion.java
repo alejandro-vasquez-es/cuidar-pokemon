@@ -29,7 +29,7 @@ public class HiloPeticion extends Thread {
 			} catch (InterruptedException ex) {
 				System.out.println("Error en el sleep " + ex);
 			}
-			JOptionPane.showMessageDialog(null, "Tu mascota " + mascota.getNombre() + "realizó una petición de " + tipo,
+			JOptionPane.showMessageDialog(null, "Tu mascota " + mascota.getApodo() + " realizó una petición de " + tipo,
 					"Petición",
 					JOptionPane.INFORMATION_MESSAGE);
 			peticiones++;
@@ -41,7 +41,7 @@ public class HiloPeticion extends Thread {
 	}
 
 	public void actualizarPeticiones() {
-		mascota.setPeticionesComida("peticiones de " + tipo + ": " + peticiones);
+		mascota.setPeticiones(tipo, peticiones);
 
 	}
 
@@ -49,6 +49,14 @@ public class HiloPeticion extends Thread {
 
 	public void setPeticionesMaximas(int peticionesMaximas) {
 		this.peticionesMaximas = peticionesMaximas;
+	}
+
+	/*  */
+
+	/* GETTERS */
+
+	public int getPeticiones() {
+		return peticiones;
 	}
 
 	/*  */

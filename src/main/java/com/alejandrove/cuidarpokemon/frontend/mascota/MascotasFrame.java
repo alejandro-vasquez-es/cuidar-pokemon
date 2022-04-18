@@ -104,6 +104,7 @@ public class MascotasFrame extends javax.swing.JFrame {
         pokemonImageLabel10 = new javax.swing.JLabel();
         pokemonTitleLabel10 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mascotas");
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 36)); // NOI18N
