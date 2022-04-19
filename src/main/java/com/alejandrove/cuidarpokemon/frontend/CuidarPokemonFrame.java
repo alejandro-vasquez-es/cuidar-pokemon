@@ -6,6 +6,9 @@ package com.alejandrove.cuidarpokemon.frontend;
 
 import com.alejandrove.cuidarpokemon.backend.MotorJuego;
 import com.alejandrove.cuidarpokemon.frontend.mascota.MascotasFrame;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -88,6 +91,11 @@ public class CuidarPokemonFrame extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
         jButton5.setText("Ayuda");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,6 +138,16 @@ public class CuidarPokemonFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    if (Desktop.isDesktopSupported()) {
+        try {
+            File myFile = new File("Manual  de usuario.pdf");
+            Desktop.getDesktop().open(myFile);
+        } catch (IOException ex) {
+        }
+}
+    }//GEN-LAST:event_jButton5ActionPerformed
 
         private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton4ActionPerformed
                 DevInfoFrame acercaDe = new DevInfoFrame();

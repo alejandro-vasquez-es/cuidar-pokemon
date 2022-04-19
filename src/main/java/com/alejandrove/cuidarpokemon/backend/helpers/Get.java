@@ -15,6 +15,9 @@ public class Get {
             URL url = new URL("https://pokeapi.co/api/v2/pokemon/" + id);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.addRequestProperty("User-Agent", "Mozilla");
+            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(5000);
             conn.setRequestMethod("GET");
             conn.connect();
 
