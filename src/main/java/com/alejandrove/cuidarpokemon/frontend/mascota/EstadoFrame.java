@@ -37,7 +37,8 @@ public class EstadoFrame extends javax.swing.JFrame {
         peticionesList.setListData(new String[] {
                 mascota.getPeticionesComidaString(),
                 mascota.getPeticionesLimpiarString(),
-                mascota.getPeticionesCurarString()
+                mascota.getPeticionesCurarString(),
+                mascota.getPeticionesPaseoString()
         });
         tituloLabel.setText("Estado: " + mascota.getEstado());
     }

@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.alejandrove.cuidarpokemon.backend.helpers.Get;
+import com.alejandrove.cuidarpokemon.frontend.mascota.PasearFrame;
 import com.alejandrove.cuidarpokemon.frontend.memoria.Card;
+import com.alejandrove.cuidarpokemon.frontend.memoria.MemoriaFrame;
 
 public class Memoria {
 
@@ -133,14 +135,20 @@ public class Memoria {
 			if (jugador.getParejasVolteadas() == oponente.getParejasVolteadas()) {
 				JOptionPane.showMessageDialog(frame, "El juego ha terminado en empate!", "Juego terminado",
 						JOptionPane.INFORMATION_MESSAGE);
+				((PasearFrame) ((MemoriaFrame) frame).parent).mascotaPaseada(false);
 			} else if (jugador.getParejasVolteadas() > oponente.getParejasVolteadas()) {
 				JOptionPane.showMessageDialog(frame, "Tu pokemon ha ganado!", "Juego terminado",
 						JOptionPane.INFORMATION_MESSAGE);
+				((PasearFrame) ((MemoriaFrame) frame).parent).mascotaPaseada(true);
 			} else if (jugador.getParejasVolteadas() < oponente.getParejasVolteadas()) {
 				JOptionPane.showMessageDialog(frame, "El pokemon rival ha ganado!", "Juego terminado",
 						JOptionPane.INFORMATION_MESSAGE);
-
+				((PasearFrame) ((MemoriaFrame) frame).parent).mascotaPaseada(false);
 			}
+			frame.setVisible(false);
+			frame.dispose();
+			((MemoriaFrame) frame).parent.setVisible(true);
+
 		}
 
 	}

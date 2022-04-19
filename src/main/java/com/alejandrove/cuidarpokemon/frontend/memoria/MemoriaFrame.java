@@ -4,6 +4,7 @@
  */
 package com.alejandrove.cuidarpokemon.frontend.memoria;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.alejandrove.cuidarpokemon.backend.memoria.Memoria;
@@ -14,15 +15,17 @@ import com.alejandrove.cuidarpokemon.backend.memoria.Memoria;
  */
 public class MemoriaFrame extends javax.swing.JFrame {
 
-        Card[] imagenesLabel;
-        Memoria memoria;
-        int[] posiciones;
-        int totalPosiciones;
+        public Card[] imagenesLabel;
+        public Memoria memoria;
+        public int[] posiciones;
+        public int totalPosiciones;
+        public JFrame parent;
 
         /**
          * Creates new form MemoriaFrame
          */
-        public MemoriaFrame(int parejas) {
+        public MemoriaFrame(int parejas, JFrame parent) {
+                this.parent = parent;
                 initComponents();
                 setImagenesLabel();
                 this.memoria = new Memoria(parejas, this);
@@ -33,8 +36,15 @@ public class MemoriaFrame extends javax.swing.JFrame {
                 setImagenesLabel();
                 setImageIconSegunParejas();
                 addListeners();
-                JOptionPane.showMessageDialog(this, "Bienvenido al juego de memoria, tu mascota empieza jugando.",
-                                "Mensaje inicial", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        @Override
+        public void setVisible(boolean b) {
+                super.setVisible(b);
+                if (b)
+                        JOptionPane.showMessageDialog(this,
+                                        "Bienvenido al juego de memoria, tu mascota empieza jugando.",
+                                        "Mensaje inicial", JOptionPane.INFORMATION_MESSAGE);
         }
 
         public void addListeners() {
@@ -1034,10 +1044,5 @@ public class MemoriaFrame extends javax.swing.JFrame {
         private javax.swing.JLabel jugador1Label;
         private javax.swing.JLabel jugador2Label;
         // End of variables declaration//GEN-END:variables
-
-        public static void main(String[] args) {
-                MemoriaFrame memoriaFrame = new MemoriaFrame(20);
-                memoriaFrame.setVisible(true);
-        }
 
 }

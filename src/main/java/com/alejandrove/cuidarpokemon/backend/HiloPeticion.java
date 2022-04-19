@@ -35,7 +35,6 @@ public class HiloPeticion extends Thread {
 			peticiones++;
 			actualizarPeticiones();
 		}
-		// TODO: qué pasa al alcanzar el límite de peticiones
 		limitePeticionesAlcanzado();
 
 	}
@@ -77,7 +76,7 @@ public class HiloPeticion extends Thread {
 
 				break;
 			case PeticionesTypes.pasear:
-
+				mascota.enfermar();
 				break;
 
 			default:

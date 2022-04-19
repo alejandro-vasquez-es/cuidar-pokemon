@@ -1,5 +1,7 @@
 package com.alejandrove.cuidarpokemon.backend;
 
+import javax.swing.JOptionPane;
+
 import com.alejandrove.cuidarpokemon.backend.tienda.comida.Comida;
 import com.alejandrove.cuidarpokemon.backend.tienda.medicina.Medicina;
 
@@ -20,7 +22,24 @@ public class Jugador {
 		this.totalMedicinas = 0;
 		this.comidas = new Comida[100];
 		this.totalComidas = 0;
-		this.dinero = 2000;
+		this.dinero = 250;
+	}
+
+	public void revivirMascota(Mascota mascota) {
+		int precioRevivir = mascota.getNivel() * 5 + 10;
+		if (dinero > precioRevivir) {
+			mascota.nacer();
+			dinero -= precioRevivir;
+			JOptionPane.showMessageDialog(null,
+					"Has revivido a tu mascota! pasas a tener " + dinero + " de dinero.", "Mascota revivida",
+					JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"No tienes el dinero suficiente para realizar el pago, necesitas " + precioRevivir,
+					"Dinero insuficiente",
+					JOptionPane.WARNING_MESSAGE);
+		}
+
 	}
 
 	public void agregarDinero(int dineroAgregado) {

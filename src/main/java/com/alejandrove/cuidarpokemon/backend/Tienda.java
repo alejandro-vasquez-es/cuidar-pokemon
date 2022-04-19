@@ -52,7 +52,7 @@ public class Tienda {
 
 		ImageIcon sprite = new ImageIcon(image);
 
-		jugador.comprarMascota(new Mascota(apodo, sprite, data[0], logs));
+		jugador.comprarMascota(new Mascota(apodo, sprite, data[0], logs, jugador));
 	}
 
 	public void venderComida(Jugador jugador, Comida comida) {

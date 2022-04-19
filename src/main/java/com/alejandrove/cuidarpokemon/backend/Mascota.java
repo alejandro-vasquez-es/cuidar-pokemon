@@ -19,10 +19,12 @@ public class Mascota {
 	private String estado;
 	private ImageIcon sprite;
 	private String nombre;
-	private int tiempoMuerte;
 	public HiloPeticion hiloPeticionComida;
 	public int segundosPeticionComida;
 	private String peticionesComidaString;
+	public HiloPeticion hiloPeticionPaseo;
+	public int segundosPeticionPaseo;
+	private String peticionesPaseoString;
 	public MascotaFrame frame;
 	private String peticionesLimpiarString;
 	private int peticionesLimpiar;
@@ -30,42 +32,76 @@ public class Mascota {
 	private String peticionesCurarString;
 	private int peticionesCurar;
 	private Log[] logs;
+	private int tiempoMuerte;
 	private int cantidadBatallasSiguienteNivel;
 	private int batallasRealizadas;
+	private Jugador jugador;
 
-	public Mascota(String apodo, ImageIcon sprite, String nombre, Log[] logs) {
-		this.nivel = 1;
+	public Mascota(String apodo, ImageIcon sprite, String nombre, Log[] logs, Jugador jugador) {
 		this.precio = 50;
-		this.segundosPeticionComida = 7;
-		this.hiloPeticionComida = new HiloPeticion(5, segundosPeticionComida, PeticionesTypes.comida, this);
+		this.segundosPeticionComida = 60;
+		this.segundosPeticionPaseo = 120;
 		this.peticionesLimpiar = 0;
 		this.peticionesCurar = 0;
-		this.nivel = 0;
 		this.apodo = apodo;
 		this.sprite = sprite;
 		this.nombre = nombre;
 		this.logs = logs;
 		this.frame = null;
+		this.jugador = jugador;
+		this.tiempoMuerte = 60;
 	}
 
 	public void nacer() {
+		this.nivel = 0;
+		setCantidadBatallasSiguienteNivel();
+		this.hiloPeticionComida = new HiloPeticion(5, segundosPeticionComida, PeticionesTypes.comida, this);
 		hiloPeticionComida.start();
 		hiloPeticionComida.actualizarPeticiones();
+		this.hiloPeticionPaseo = new HiloPeticion(4, segundosPeticionPaseo, PeticionesTypes.pasear, this);
+		hiloPeticionPaseo.start();
+		hiloPeticionPaseo.actualizarPeticiones();
 		setPeticiones(PeticionesTypes.limpiar, peticionesLimpiar);
 		setPeticiones(PeticionesTypes.curar, peticionesCurar);
 		this.estado = EstadosTypes.vivo;
 		logs[HelperClass.getTotalLogs(logs)] = new Log(LogTypes.nacimiento, this);
 	}
 
+	public void pasear(boolean gano) {
+		if (peticionesCurar <= 0) {
+			hiloPeticionPaseo.reiniciarPeticiones();
+			hiloPeticionPaseo.actualizarPeticiones();
+			logs[HelperClass.getTotalLogs(logs)] = new Log(LogTypes.paseo, this);
+			if (gano)
+				batallar();
+		}
+	}
+
 	public void subirNivel() {
 		nivel++;
-		int randomNumber = (int) Math.floor(Math.random() * (15 - 5 + 1) + 5);
-		cantidadBatallasSiguienteNivel = randomNumber * nivel;
+		setCantidadBatallasSiguienteNivel();
 		batallasRealizadas = 0;
+		JOptionPane.showMessageDialog(null, "Tu mascota " + apodo + " ha subido a nivel " + nivel, "Subió nivel",
+				JOptionPane.INFORMATION_MESSAGE);
+		logs[HelperClass.getTotalLogs(logs)] = new Log(LogTypes.nivel, this);
+		if (nivel == 5) {
+			JOptionPane.showMessageDialog(null,
+					"Como tu mascota subió al nivel 5, morirá después de cierto tiempo, podrás revivirla posteriormente",
+					"Subió nivel",
+					JOptionPane.WARNING_MESSAGE);
+			HiloMuerte hiloMuerte = new HiloMuerte(tiempoMuerte, this);
+			hiloMuerte.start();
+		}
 	}
 
 	public void batallar() {
 		batallasRealizadas++;
+		int randomNumber = (int) Math.floor(Math.random() * (15 - 1 + 1) + 1);
+		int dineroGanado = 10 + 20 * nivel + randomNumber;
+		jugador.agregarDinero(dineroGanado);
+		if (batallasRealizadas == cantidadBatallasSiguienteNivel) {
+			subirNivel();
+		}
 	}
 
 	public void ganarBatallar(Jugador jugador) {
@@ -81,6 +117,8 @@ public class Mascota {
 		this.estado = EstadosTypes.muerto;
 		hiloPeticionComida.reiniciarPeticiones();
 		hiloPeticionComida.actualizarPeticiones();
+		hiloPeticionPaseo.reiniciarPeticiones();
+		hiloPeticionPaseo.actualizarPeticiones();
 		peticionesCurar = 0;
 		peticionesLimpiar = 0;
 		setPeticiones(PeticionesTypes.curar, peticionesCurar);
@@ -105,8 +143,6 @@ public class Mascota {
 						JOptionPane.INFORMATION_MESSAGE);
 				if (peticionesLimpiar == 3) {
 					peticionesLimpiar = 0;
-					JOptionPane.showMessageDialog(null, "Tú mascota necesita ser curada!", "Curar mascota",
-							JOptionPane.INFORMATION_MESSAGE);
 					enfermar();
 				}
 				setPeticiones(PeticionesTypes.limpiar, peticionesLimpiar);
@@ -117,7 +153,11 @@ public class Mascota {
 	public void enfermar() {
 		peticionesCurar++;
 		setPeticiones(PeticionesTypes.curar, peticionesCurar);
+		hiloPeticionPaseo.reiniciarPeticiones();
+		hiloPeticionPaseo.actualizarPeticiones();
 		logs[HelperClass.getTotalLogs(logs)] = new Log(LogTypes.enfermedad, this);
+		JOptionPane.showMessageDialog(null, "Tú mascota necesita ser curada!", "Curar mascota",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void curarEnfermedades(int enfermedadesCuradas) {
@@ -128,6 +168,9 @@ public class Mascota {
 
 	public void curar(Medicina medicina) {
 		medicina.curarEnfermedades(this);
+		this.hiloPeticionPaseo = new HiloPeticion(4, segundosPeticionPaseo, PeticionesTypes.pasear, this);
+		hiloPeticionPaseo.start();
+		hiloPeticionPaseo.actualizarPeticiones();
 	}
 
 	public void limpiar() {
@@ -137,6 +180,11 @@ public class Mascota {
 	}
 
 	/* SETTERS */
+
+	public void setCantidadBatallasSiguienteNivel() {
+		int randomNumber = (int) Math.floor(Math.random() * (15 - 5 + 1) + 5);
+		cantidadBatallasSiguienteNivel = randomNumber * nivel;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -162,6 +210,9 @@ public class Mascota {
 			case PeticionesTypes.curar:
 				this.peticionesCurarString = mensaje;
 				break;
+			case PeticionesTypes.pasear:
+				this.peticionesPaseoString = mensaje;
+				break;
 
 			default:
 				break;
@@ -184,6 +235,10 @@ public class Mascota {
 		return estado;
 	}
 
+	public int getNivel() {
+		return nivel;
+	}
+
 	public String getPeticionesComidaString() {
 		return peticionesComidaString;
 	}
@@ -194,6 +249,10 @@ public class Mascota {
 
 	public String getPeticionesCurarString() {
 		return peticionesCurarString;
+	}
+
+	public String getPeticionesPaseoString() {
+		return peticionesPaseoString;
 	}
 
 	public int getPeticionesCurar() {

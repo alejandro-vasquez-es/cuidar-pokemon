@@ -12,7 +12,6 @@ public class Cereal extends Comida implements AfectarPeticionesMaximas {
 	@Override
 	public void afectarPeticionesMaximas(Mascota mascota) {
 		mascota.hiloPeticionComida.setPeticionesMaximas(7);
-		;
 	}
 
 	@Override
