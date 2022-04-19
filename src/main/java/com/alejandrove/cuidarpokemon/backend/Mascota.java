@@ -83,7 +83,7 @@ public class Mascota {
 		batallasRealizadas = 0;
 		JOptionPane.showMessageDialog(null, "Tu mascota " + apodo + " ha subido a nivel " + nivel, "Subió nivel",
 				JOptionPane.INFORMATION_MESSAGE);
-		logs[HelperClass.getTotalLogs(logs)] = new Log(LogTypes.nivel, this);
+		logs[HelperClass.getTotalLogs(logs)] = new Log(LogTypes.nivel, this, nivel);
 		if (nivel == 5) {
 			JOptionPane.showMessageDialog(null,
 					"Como tu mascota subió al nivel 5, morirá después de cierto tiempo, podrás revivirla posteriormente",

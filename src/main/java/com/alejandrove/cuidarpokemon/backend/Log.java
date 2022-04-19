@@ -1,6 +1,5 @@
 package com.alejandrove.cuidarpokemon.backend;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,6 +10,7 @@ public class Log {
 	private String tipo;
 	private String informacion;
 	private LocalDateTime fechaHora;
+	private int nivel;
 
 	public Log(String tipo, Mascota mascota) {
 		this.tipo = tipo;
@@ -18,9 +18,20 @@ public class Log {
 		setInformacionSegunTipo(tipo, mascota);
 	}
 
+	public Log(String tipo, Mascota mascota, int nivel) {
+		this.tipo = tipo;
+		fechaHora = LocalDateTime.now();
+		this.nivel = nivel;
+		setInformacionSegunTipo(tipo, mascota);
+	}
+
 	/* GETTERS */
 	public String getTipo() {
 		return tipo;
+	}
+
+	public int getNivel() {
+		return nivel;
 	}
 	/*  */
 
@@ -44,7 +55,8 @@ public class Log {
 				setInformacion("Se ha sacado a pasear al pokemon con el apodo de " + mascota.getApodo());
 				break;
 			case LogTypes.nivel:
-				setInformacion("Se ha subido de nivel al pokemon con el apodo de " + mascota.getApodo());
+				setInformacion("El pokemon con el apodo de  " + mascota.getApodo() + " ha subido al nivel "
+						+ nivel);
 				break;
 			case LogTypes.muerte:
 				setInformacion("El pokemon con el apodo de " + mascota.getApodo() + " se ha muerto :(");
